@@ -500,11 +500,6 @@ DASHBOARD_HTML = """
             }
         }
 
-        console.log('✓ All functions loaded in HEAD');
-        // Test message visible in page
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✓ Page DOM fully loaded - buttons should be clickable now!');
-        });
     </script>
     <style>
         body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #333; }

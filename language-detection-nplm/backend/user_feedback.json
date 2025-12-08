@@ -4,5 +4,47 @@
     "predicted": "indonesia",
     "correct_label": "sun",
     "corrected": true
+  },
+  {
+    "text": "ayeuna asep siga nu kabedil ku jangjawokan",
+    "predicted": "indonesia",
+    "correct_label": "sun",
+    "corrected": true
+  },
+  {
+    "text": "ai sia cing baleg atuh jadi jelema teh",
+    "predicted": "indonesia",
+    "correct_label": "sun",
+    "corrected": true
+  },
+  {
+    "text": "deuleu we jug kaditu",
+    "predicted": "english",
+    "correct_label": "sun",
+    "corrected": true
+  },
+  {
+    "text": "anjay gelo si ncep bisa balap",
+    "predicted": "indonesia",
+    "correct_label": "sun",
+    "corrected": true
+  },
+  {
+    "text": "anjing",
+    "predicted": "sunda",
+    "correct_label": "ind",
+    "corrected": true
+  },
+  {
+    "text": "anjing sia goblog",
+    "predicted": "indonesia",
+    "correct_label": "sun",
+    "corrected": true
+  },
+  {
+    "text": "anjing sia",
+    "predicted": "indonesia",
+    "correct_label": "sun",
+    "corrected": true
   }
 ]
