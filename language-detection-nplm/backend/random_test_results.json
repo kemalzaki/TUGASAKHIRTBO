@@ -1,0 +1,758 @@
+{
+  "eng": [
+    [
+      "You was study soccer together.",
+      "eng",
+      1.0
+    ],
+    [
+      "My friend is study the lesson rarely",
+      "eng",
+      0.9999997615814209
+    ],
+    [
+      "The student will test programming.",
+      "eng",
+      0.9999996423721313
+    ],
+    [
+      "My friend are study every day",
+      "eng",
+      1.0
+    ],
+    [
+      "They test programming",
+      "eng",
+      0.9998914003372192
+    ],
+    [
+      "My friend was test mathematics every day.",
+      "eng",
+      1.0
+    ],
+    [
+      "She love soccer carefully",
+      "eng",
+      0.9999992847442627
+    ],
+    [
+      "They was study soccer often",
+      "eng",
+      1.0
+    ],
+    [
+      "She will learn together",
+      "eng",
+      0.9999992847442627
+    ],
+    [
+      "They like programming",
+      "eng",
+      0.9999508857727051
+    ],
+    [
+      "You was study python",
+      "eng",
+      0.9999855756759644
+    ],
+    [
+      "He are play the lesson at school",
+      "eng",
+      1.0
+    ],
+    [
+      "She hate soccer",
+      "eng",
+      0.999984860420227
+    ],
+    [
+      "He read python carefully",
+      "eng",
+      0.9999761581420898
+    ],
+    [
+      "The student like soccer together",
+      "eng",
+      0.9999983310699463
+    ],
+    [
+      "They will hate music",
+      "eng",
+      0.9999992847442627
+    ],
+    [
+      "The student learn recipes often",
+      "eng",
+      0.999996542930603
+    ],
+    [
+      "He is test programming tomorrow",
+      "eng",
+      0.9999933242797852
+    ],
+    [
+      "We are test carefully",
+      "eng",
+      0.9999983310699463
+    ],
+    [
+      "The student hate recipes together",
+      "eng",
+      0.9999960660934448
+    ],
+    [
+      "My friend play movies",
+      "eng",
+      0.9999985694885254
+    ],
+    [
+      "They will love soccer at school",
+      "eng",
+      1.0
+    ],
+    [
+      "People is like programming.",
+      "eng",
+      0.9999994039535522
+    ],
+    [
+      "She will study the lesson rarely",
+      "eng",
+      0.9999980926513672
+    ],
+    [
+      "My friend is read python today",
+      "eng",
+      0.9999998807907104
+    ],
+    [
+      "You was love movies often",
+      "eng",
+      1.0
+    ],
+    [
+      "We is watch recipes together",
+      "eng",
+      0.999994158744812
+    ],
+    [
+      "You study the exam quickly",
+      "eng",
+      0.9999020099639893
+    ],
+    [
+      "He will learn",
+      "eng",
+      0.9999799728393555
+    ],
+    [
+      "The student watch music today",
+      "eng",
+      0.9998064637184143
+    ],
+    [
+      "The student was like the exam together.",
+      "eng",
+      1.0
+    ],
+    [
+      "The student are love movies at school",
+      "eng",
+      1.0
+    ],
+    [
+      "People is read the lesson now",
+      "eng",
+      0.9999873638153076
+    ],
+    [
+      "They will hate music every day.",
+      "eng",
+      1.0
+    ],
+    [
+      "People love movies often",
+      "eng",
+      0.9999979734420776
+    ],
+    [
+      "You write the exam",
+      "eng",
+      0.9999371767044067
+    ],
+    [
+      "People play recipes every day",
+      "eng",
+      0.9999997615814209
+    ],
+    [
+      "He is play music tomorrow",
+      "eng",
+      0.9999969005584717
+    ],
+    [
+      "We was like python.",
+      "eng",
+      0.9999990463256836
+    ],
+    [
+      "They learn the exam quickly",
+      "eng",
+      0.999919056892395
+    ],
+    [
+      "You are play mathematics often",
+      "eng",
+      1.0
+    ],
+    [
+      "I is write movies tomorrow",
+      "eng",
+      0.9999964237213135
+    ],
+    [
+      "My friend hate often",
+      "eng",
+      0.9999992847442627
+    ],
+    [
+      "He like mathematics",
+      "eng",
+      0.999971866607666
+    ],
+    [
+      "She is read the exam carefully",
+      "eng",
+      0.9999997615814209
+    ],
+    [
+      "She are read soccer",
+      "eng",
+      0.9999990463256836
+    ],
+    [
+      "The student was like music now.",
+      "eng",
+      0.9999997615814209
+    ],
+    [
+      "People was read recipes at school.",
+      "eng",
+      1.0
+    ],
+    [
+      "I like recipes rarely",
+      "eng",
+      0.999946117401123
+    ],
+    [
+      "You write soccer",
+      "eng",
+      0.9999786615371704
+    ]
+  ],
+  "ind": [
+    [
+      "Mereka bermain musik jarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Guru itu bermain buku sekarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Guru itu menguji musik dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Ia berjalan ujian jarang",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Orang-orang mencoba buku sekarang",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Orang-orang berjalan film jarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Kami belajar film",
+      "ind",
+      0.9999960660934448
+    ],
+    [
+      "Ia tidak suka pelajaran dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Murid itu bermain pemrograman",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Kamu bermain resep bersama",
+      "ind",
+      1.0
+    ],
+    [
+      "Kami tidak suka ujian bersama",
+      "ind",
+      1.0
+    ],
+    [
+      "Ia menonton",
+      "ind",
+      0.9996873140335083
+    ],
+    [
+      "Ia menguji resep sering",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Murid itu mencoba film",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Mereka menguji film setiap hari",
+      "ind",
+      1.0
+    ],
+    [
+      "Mereka membaca matematika",
+      "ind",
+      0.999996542930603
+    ],
+    [
+      "Kamu belajar python jarang",
+      "ind",
+      0.9999995231628418
+    ],
+    [
+      "Kamu bermain resep hari ini",
+      "ind",
+      1.0
+    ],
+    [
+      "Kami bermain pelajaran",
+      "ind",
+      0.9999954700469971
+    ],
+    [
+      "Saya berjalan pemrograman",
+      "ind",
+      0.9999692440032959
+    ],
+    [
+      "Mereka bermain python bersama",
+      "ind",
+      0.9999992847442627
+    ],
+    [
+      "Ia membaca musik hari ini",
+      "ind",
+      1.0
+    ],
+    [
+      "Guru itu menonton python",
+      "ind",
+      0.9999985694885254
+    ],
+    [
+      "Murid itu belajar dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Ia berjalan sepak bola sering",
+      "ind",
+      1.0
+    ],
+    [
+      "Murid itu belajar python dengan hati-hati",
+      "ind",
+      1.0
+    ],
+    [
+      "Teman saya menonton python dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Mereka tidak suka resep besok",
+      "ind",
+      1.0
+    ],
+    [
+      "Kami tidak suka pemrograman",
+      "ind",
+      0.9999995231628418
+    ],
+    [
+      "Kami membaca pelajaran sering",
+      "ind",
+      0.9999997615814209
+    ],
+    [
+      "Murid itu tidak suka film sekarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Teman saya belajar sepak bola",
+      "ind",
+      0.9999992847442627
+    ],
+    [
+      "Dia menulis pemrograman",
+      "ind",
+      0.9999864101409912
+    ],
+    [
+      "Ia bermain film jarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Kamu menulis pelajaran",
+      "ind",
+      0.999996542930603
+    ],
+    [
+      "Ia suka python setiap hari",
+      "ind",
+      0.9999992847442627
+    ],
+    [
+      "Orang-orang menonton python",
+      "ind",
+      0.9999493360519409
+    ],
+    [
+      "Kamu bermain dengan hati-hati",
+      "ind",
+      1.0
+    ],
+    [
+      "Dia bermain resep",
+      "ind",
+      0.9999974966049194
+    ],
+    [
+      "Mereka berjalan resep",
+      "ind",
+      0.9999953508377075
+    ],
+    [
+      "Murid itu bermain pelajaran jarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Kamu menulis film",
+      "ind",
+      0.999997615814209
+    ],
+    [
+      "Ia berjalan matematika besok",
+      "ind",
+      1.0
+    ],
+    [
+      "Dia mencoba musik di sekolah",
+      "ind",
+      1.0
+    ],
+    [
+      "Mereka menguji film dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Murid itu menguji ujian dengan hati-hati",
+      "ind",
+      1.0
+    ],
+    [
+      "Murid itu suka film jarang",
+      "ind",
+      1.0
+    ],
+    [
+      "Mereka berjalan resep dengan cepat",
+      "ind",
+      1.0
+    ],
+    [
+      "Orang-orang menonton ujian sekarang",
+      "ind",
+      0.9999996423721313
+    ],
+    [
+      "Kami tidak suka matematika bersama",
+      "ind",
+      1.0
+    ]
+  ],
+  "sun": [
+    [
+      "Manéhna maca uji di sakola",
+      "ind",
+      0.9781720638275146
+    ],
+    [
+      "Jalma-jalma leumpang maén bal",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Maranehna maca musik babarengan",
+      "ind",
+      0.9778246283531189
+    ],
+    [
+      "Manéhna nulis pemrograman teu ilahar",
+      "ind",
+      0.9508054852485657
+    ],
+    [
+      "Murid éta henteu resep palajaran sarelek",
+      "ind",
+      0.9995343685150146
+    ],
+    [
+      "Murid éta nonton pemrograman sarelek",
+      "ind",
+      0.9985114932060242
+    ],
+    [
+      "Anjeun henteu resep maén bal ayeuna",
+      "ind",
+      0.8683750629425049
+    ],
+    [
+      "Manéhna diajar musik saeutik",
+      "ind",
+      0.722225546836853
+    ],
+    [
+      "Anjeun ngapalkeun palajaran di sakola",
+      "ind",
+      0.9781720638275146
+    ],
+    [
+      "Urang ngapalkeun uji di sakola",
+      "ind",
+      0.854325532913208
+    ],
+    [
+      "Guru éta nulis pemrograman sapopoe",
+      "ind",
+      0.998252809047699
+    ],
+    [
+      "Urang maca maén bal teu ilahar",
+      "sun",
+      0.6918226480484009
+    ],
+    [
+      "Jalma-jalma henteu resep python di sakola",
+      "ind",
+      0.9999505281448364
+    ],
+    [
+      "Murid éta nulis musik",
+      "ind",
+      0.9993390440940857
+    ],
+    [
+      "Murid éta henteu resep musik",
+      "ind",
+      0.9999899864196777
+    ],
+    [
+      "Dek maca resep teu ilahar",
+      "ind",
+      0.9841567873954773
+    ],
+    [
+      "Maranehna diajar buku",
+      "ind",
+      0.8039492964744568
+    ],
+    [
+      "Dek leumpang sarelek",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Maranehna maén sarelek",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Murid éta henteu resep python",
+      "ind",
+      0.9999281167984009
+    ],
+    [
+      "Dek nulis pilem",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Dek leumpang",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Maranehna leumpang buku sarelek",
+      "ind",
+      0.9845525026321411
+    ],
+    [
+      "Maranehna diajar sarelek",
+      "sun",
+      0.6639300584793091
+    ],
+    [
+      "Anjeun nyoba matematika sapopoe",
+      "ind",
+      0.9849112033843994
+    ],
+    [
+      "Manéhna nonton uji gancang",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Jalma-jalma suka matematika sapopoe",
+      "ind",
+      0.9997088313102722
+    ],
+    [
+      "Guru éta ngapalkeun pemrograman babarengan",
+      "ind",
+      0.998252809047699
+    ],
+    [
+      "Murid éta maén resep sarelek",
+      "ind",
+      0.9995343685150146
+    ],
+    [
+      "Murid éta suka resep tahun ayeuna",
+      "ind",
+      0.9999412298202515
+    ],
+    [
+      "Murid éta nyoba palajaran",
+      "ind",
+      0.9700588583946228
+    ],
+    [
+      "Manéhna nulis resep saeutik",
+      "ind",
+      0.9841567873954773
+    ],
+    [
+      "Anjeun nyoba teu ilahar",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Murid éta nulis musik sarelek",
+      "ind",
+      0.9993390440940857
+    ],
+    [
+      "Murid éta maca buku di sakola",
+      "ind",
+      0.9999903440475464
+    ],
+    [
+      "Jalma-jalma diajar musik",
+      "ind",
+      0.722225546836853
+    ],
+    [
+      "Guru éta nonton ayeuna",
+      "ind",
+      0.6995239853858948
+    ],
+    [
+      "Maranehna nulis palajaran",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Murid éta diajar uji babarengan",
+      "ind",
+      0.6735627055168152
+    ],
+    [
+      "Jalma-jalma maén matematika",
+      "ind",
+      0.9849112033843994
+    ],
+    [
+      "Urang leumpang python sarelek",
+      "ind",
+      0.5235410332679749
+    ],
+    [
+      "Guru éta maén",
+      "ind",
+      0.964844286441803
+    ],
+    [
+      "Manéhna nyoba di sakola",
+      "ind",
+      0.9781720638275146
+    ],
+    [
+      "Réréncangan henteu resep uji sarelek",
+      "ind",
+      0.9841567873954773
+    ],
+    [
+      "Kuring diajar buku tahun ayeuna",
+      "sun",
+      0.9732617139816284
+    ],
+    [
+      "Réréncangan leumpang maén bal",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Jalma-jalma maén sarelek",
+      "ind",
+      0.4245102107524872
+    ],
+    [
+      "Jalma-jalma suka pilem tahun ayeuna",
+      "ind",
+      0.8262799978256226
+    ],
+    [
+      "Urang henteu resep maén bal",
+      "ind",
+      0.9144083261489868
+    ],
+    [
+      "Anjeun nyoba musik",
+      "ind",
+      0.9778246283531189
+    ]
+  ]
+}
