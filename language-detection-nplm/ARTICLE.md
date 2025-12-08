@@ -124,6 +124,312 @@ Model ini setara dengan PFSA karena:
 - Softmax output adalah "final probability of accepting in each state"
 - Turing-completeness tercapai karena recurrent structure dapat disimulasikan melalui iterative stacking
 
+#### 2.6.1 Complete FSA Diagram
+
+**Full Neural Network as PFSA State Machine:**
+
+```
+                           INPUT LAYER
+                              q₀
+                              |
+                    (1000-dim TF-IDF vector)
+                    [ku, ur, ri, ..., eu, ...]
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   EMBEDDING LAYER    │
+                    │   fc_embed (W: 1000  │
+                    │       × 128)         │
+                    │   q₀ → q₁            │
+                    │   1000D → 128D       │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   DROPOUT (0.3)      │
+                    │   Regularization     │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │  HIDDEN LAYER 1      │
+                    │  fc1 (W: 128 × 256)  │
+                    │  q₁ → q₂             │
+                    │  128D → 256D         │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   ReLU Activation    │
+                    │  max(0, x)           │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │  Layer Normalization │
+                    │  Batch Norm          │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   DROPOUT (0.3)      │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │  HIDDEN LAYER 2      │
+                    │  fc2 (W: 256 × 128)  │
+                    │  q₂ → q₃             │
+                    │  256D → 128D         │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   ReLU Activation    │
+                    │  max(0, x)           │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │  Layer Normalization │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   DROPOUT (0.3)      │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │   OUTPUT LAYER       │
+                    │  fc3 (W: 128 × 3)    │
+                    │  q₃ → q₄ (logits)    │
+                    │  128D → 3D           │
+                    │  [z₁, z₂, z₃]        │
+                    └──────────────────────┘
+                              |
+                              ↓
+                    ┌──────────────────────┐
+                    │ SOFTMAX CONVERSION   │
+                    │ pᵢ = e^zᵢ / Σe^zⱼ    │
+                    │ q₄ → q_FINAL         │
+                    └──────────────────────┘
+                              |
+                    ┌─────────┼─────────┐
+                    ↓         ↓         ↓
+                 q_IND     q_ENG     q_SUN
+              P(Indo)    P(Eng)    P(Sun)
+               0.15       0.08      0.77
+```
+
+**State Encoding:**
+- $q_0$: Input encoding (vocabulary dimension 1000)
+- $q_1$: Embedding space (dimension 128)
+- $q_2$: First hidden state (dimension 256)
+- $q_3$: Second hidden state (dimension 128)
+- $q_4$: Logits/pre-softmax (dimension 3)
+- $q_{\text{FINAL}}$: Probability distribution output (3 values summing to 1.0)
+- $q_{\text{IND}}, q_{\text{ENG}}, q_{\text{SUN}}$: Final accepting states (language hypotheses)
+
+#### 2.6.2 FSA Transition Table
+
+| From State | Transformation | Parameters | To State | Output Dim |
+|------------|---|---|---|---|
+| $q_0$ | Linear (embedding) | $W_{\text{embed}} \in \mathbb{R}^{1000 \times 128}$ | $q_1$ | 128 |
+| $q_1$ | Dropout (0.3) | Bernoulli mask | $q_1$ | 128 |
+| $q_1$ | Linear (fc1) | $W_1 \in \mathbb{R}^{128 \times 256}$ | $q_2$ | 256 |
+| $q_2$ | ReLU activation | $\max(0, x)$ | $q_2$ | 256 |
+| $q_2$ | LayerNorm | $\gamma, \beta$ parameters | $q_2$ | 256 |
+| $q_2$ | Dropout (0.3) | Bernoulli mask | $q_2$ | 256 |
+| $q_2$ | Linear (fc2) | $W_2 \in \mathbb{R}^{256 \times 128}$ | $q_3$ | 128 |
+| $q_3$ | ReLU activation | $\max(0, x)$ | $q_3$ | 128 |
+| $q_3$ | LayerNorm | $\gamma, \beta$ parameters | $q_3$ | 128 |
+| $q_3$ | Dropout (0.3) | Bernoulli mask | $q_3$ | 128 |
+| $q_3$ | Linear (fc3) | $W_3 \in \mathbb{R}^{128 \times 3}$ | $q_4$ | 3 |
+| $q_4$ | Softmax | $\text{softmax}(z)$ | $q_{\text{FINAL}}$ | 3 |
+| $q_{\text{FINAL}}$ | Argmax | $\arg\max(p_i)$ | $q_{\text{IND}}, q_{\text{ENG}}, q_{\text{SUN}}$ | 1 |
+
+#### 2.6.3 Probabilistic FSA Transition Example
+
+**Input:** "Kuring keur diajar" (Sundanese)
+
+**Step-by-step state transitions:**
+
+```
+q₀ (Input)
+│
+├─ Tokenization: "Kuring keur diajar"
+├─ N-grams: [ku, ur, ri, in, ng, ke, eu, ur, di, ia, aj, ja, ar]
+├─ TF-IDF: [0.87, 0, 0.65, ..., 0.52, 0, ..., 0.45]
+│
+↓ (fc_embed: W × 1000)
+q₁ (Embedded, 128-dim)
+│ [0.23, -0.15, 0.89, ..., -0.12] (continuous representation)
+│
+├─ ReLU, LayerNorm, Dropout
+│
+↓ (fc1: 256 neurons)
+q₂ (Hidden1, 256-dim)
+│ [0.15, 0, 0.92, ..., 0.34] (hidden features extracted)
+│
+├─ ReLU, LayerNorm, Dropout
+│
+↓ (fc2: 128 neurons)
+q₃ (Hidden2, 128-dim)
+│ [0.45, 0.12, 0.78, ..., 0.23]
+│
+├─ ReLU, LayerNorm, Dropout
+│
+↓ (fc3: 3 neurons)
+q₄ (Logits)
+│ [2.1, -0.8, 2.5]  ← raw scores before normalization
+│
+├─ Softmax: [e^2.1, e^-0.8, e^2.5] / Z
+│
+↓ 
+q_FINAL (Probabilities)
+│ [0.15, 0.08, 0.77]
+│
+├─ argmax → index 2
+│
+↓
+✓ ACCEPT: q_SUN (Language = Sundanese, Confidence = 0.77)
+```
+
+#### 2.6.4 Complete System FSA: Web Application Level
+
+**Macro-level FSA untuk entire application:**
+
+```
+START (User opens website)
+  │
+  ├─ /api/predict (Inference Pipeline)
+  │  │
+  │  ├─ Input: Text string (UTF-8)
+  │  │  │
+  │  │  ├─ Preprocessing (Tokenize, TF-IDF)
+  │  │  ├─ Neural Inference (5 layers, 194K params)
+  │  │  ├─ Softmax (probability distribution)
+  │  │  │
+  │  │  └─ Output: {language, confidence, probabilities}
+  │  │
+  │  └─ HTTP 200 (JSON response)
+  │
+  ├─ /api/correct (Active Learning Loop)
+  │  │
+  │  ├─ User provides correction
+  │  │  │
+  │  │  ├─ Save to user_feedback.json
+  │  │  ├─ Log to SQLite corrections table
+  │  │  │
+  │  │  └─ State: "Correction saved, awaiting retrain"
+  │  │
+  │  └─ HTTP 200 + prompt to retrain
+  │
+  ├─ /api/train (Retraining Loop)
+  │  │
+  │  ├─ Load dataset + user corrections
+  │  │  │
+  │  │  ├─ Vectorization (TF-IDF char n-grams)
+  │  │  ├─ Model initialization (3-layer architecture)
+  │  │  ├─ Training loop (40 epochs default)
+  │  │  │  │
+  │  │  │  ├─ For each epoch:
+  │  │  │  │  ├─ Forward pass (q₀ → q₁ → ... → q_FINAL)
+  │  │  │  │  ├─ Loss computation (Cross-Entropy)
+  │  │  │  │  ├─ Backward pass (gradients)
+  │  │  │  │  ├─ Gradient clipping (stability)
+  │  │  │  │  ├─ Optimizer step (AdamW)
+  │  │  │  │  └─ LR scheduling (reduce by 0.5 every 10 epochs)
+  │  │  │  │
+  │  │  │  └─ Training progress → WebSocket to client
+  │  │  │
+  │  │  ├─ Model saved (state_dict → .pth)
+  │  │  ├─ Vectorizer saved (pickle → .pkl)
+  │  │  │
+  │  │  └─ State: "Training complete, model ready"
+  │  │
+  │  └─ HTTP 200 + training summary
+  │
+  └─ /api/training-status (Progress monitoring)
+     │
+     ├─ Query training_state (global)
+     │  │
+     │  ├─ current_epoch / total_epochs
+     │  ├─ loss_history (list of epoch losses)
+     │  ├─ is_training (boolean)
+     │  └─ start_time (ISO timestamp)
+     │
+     └─ HTTP 200 + JSON progress
+
+[Optional Active Learning Loop]
+│
+├─ Prediction Error Detected
+│  │
+│  ├─ User clicks [Sunda] button
+│  │
+│  ├─ /api/correct ← User feedback
+│  │
+│  ├─ Wait for user to click "Retrain"
+│  │
+│  ├─ /api/train ← Full retraining with feedback
+│  │
+│  ├─ Convergence achieved (loss ≈ 0)
+│  │
+│  ├─ /api/predict ← Same text as before
+│  │
+│  └─ RESULT: Improved accuracy (e.g., 0.75 → 0.92)
+│
+└─ Repeat inference-correction-retrain cycle
+
+END (User closes website / stops interacting)
+```
+
+#### 2.6.5 Mathematical FSA Formulation
+
+**Formal FSA Definition untuk Neural Network:**
+
+$$M = (Q, \Sigma, \delta, q_0, F)$$
+
+Where:
+
+- **Q (States):** 
+  $$Q = \{q_0, q_1, q_2, q_3, q_4, q_{\text{final}}, q_{\text{IND}}, q_{\text{ENG}}, q_{\text{SUN}}\}$$
+
+- **Σ (Input Alphabet):**
+  $$\Sigma = \{\text{char n-grams}\} = \{``ku'', ``ur'', ``ri'', ..., ``tion'', ``the''\}$$
+
+- **δ (Transition Function):**
+  $$\delta(q_i, x) = f_i(W_i \cdot x + b_i)$$
+  
+  Where $f_i$ is activation function (Linear, ReLU, Softmax), $W_i$ is weight matrix, $b_i$ is bias
+
+- **$q_0$ (Initial State):**
+  $$q_0: \text{TF-IDF input vector} \in \mathbb{R}^{1000}$$
+
+- **F (Final States):**
+  $$F = \{q_{\text{IND}}, q_{\text{ENG}}, q_{\text{SUN}}\}$$
+  $$\text{with acceptance probabilities } P(q_i) = \text{softmax}(q_{\text{final}})_i$$
+
+**Transition Equations:**
+
+For layer $i$:
+$$h_i = \text{ReLU}(W_i \cdot h_{i-1} + b_i)$$
+$$h_i' = \text{Dropout}(h_i, p=0.3)$$
+$$h_i'' = \text{LayerNorm}(h_i')$$
+
+Final output:
+$$z = W_{\text{out}} \cdot h_{\text{final}} + b_{\text{out}}$$
+$$P(\text{language}) = \text{softmax}(z)$$
+
+**Turing-Completeness Argument:**
+
+The neural network FSA achieves Turing-completeness through:
+1. **Unbounded memory:** Hidden layer dimensions (128, 256) sufficient for learning complex patterns
+2. **Universal approximation:** ReLU networks can approximate any continuous function
+3. **Iterative refinement:** Multiple layers enable compositional feature learning
+4. **Probabilistic acceptance:** Softmax output defines acceptance probability rather than binary decision
+
 ---
 
 ### 2.7 Testing Procedure
