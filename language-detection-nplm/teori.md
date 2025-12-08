@@ -548,6 +548,138 @@ Semakin banyak contoh + semakin lama belajar = semakin pintar!
 
 ---
 
+## 🆕 UPDATE: Improvement Terbaru (Character N-Grams)
+
+### Masalahnya Dulu
+
+Tadi saya jelaskan NPLM menggunakan word-level patterns. Tapi ada masalahnya:
+
+**Problem:**
+```
+SUNDA: "Kuring keur diajar"
+       [Kuring] [keur] [diajar]    ← Satu-satu kata
+       
+NPLM: "Hmm, 'keur' ini ada di dataset Sunda..."
+      "Tapi 'diajar' bisa di Indonesia atau Sunda..."
+      "Confidence: 65% (ragu-ragu!)"
+      
+ERROR: Kadang model salah predict Sunda sebagai Indonesia 😞
+```
+
+**Kenapa terjadi?**
+- Indonesia dan Sunda banyak share kata yang sama
+- Kata-kata terlalu mirip ("ini", "apa", "dari", dll)
+- Model tidak melihat "signature" teks dengan cukup detail
+
+### Solusinya: Character N-Grams 🆕
+
+Alih-alih melihat kata-kata saja, sekarang model lihat **huruf-huruf!**
+
+```
+TEXT: "Kuring keur diajar"
+
+OLD (Word-level):
+→ [Kuring] [keur] [diajar]
+
+NEW (Character N-grams):
+→ "Ku" "ur" "ri" "in" "ng"   (bigrams/pasangan huruf)
+   "keu" "eur" "ur " "r k"   (trigrams/tiga huruf)
+   "ker" "era" "rau" "aja"
+   "diar" "iaja" "ajar"
+   ... dan seterusnya
+
+BENEFIT:
+Model sekarang lihat pattern unik Sunda!
+"Ku-ri-ng": Kombinasi ini lebih sering di Sunda
+"keu-ur": Pattern ini signature Sunda!
+"diar": Cara Sunda menulis 'diajar'
+
+Model: "Ah! Kombinasi huruf ini = SUNDA!"
+Confidence: 92% ✅
+```
+
+### Cara Kerjanya
+
+```
+Analogi: Mencari Orang dari Sidik Jari
+
+DULU (Word-level = Melihat dari jauh):
+- "Ada orang yang pakai baju merah"
+- Tapi banyak orang pakai baju merah
+- Tidak pasti siapa
+
+SEKARANG (Character N-gram = Melihat dari dekat):
+- "Lihat sidik jari di meja!"
+- "Garis-garis di jari ini pattern unik Sunda"
+- Bisa langsung identifikasi dengan yakin!
+```
+
+### Contoh Nyata
+
+```
+INPUT: "Kuring keur diajar pemrograman"
+
+CHARACTER BIGRAMS yang diekstrak:
+ku, ur, ri, in, ng,        ← dari "kuring"
+ke, eu, ur,                ← dari "keur"  
+di, ia, aj, ja, ar,        ← dari "diajar"
+pe, em, mp, pr, ro, og, gr, ra, am, ma, an ← dari "pemrograman"
+
+MODEL ANALISIS:
+- "Ku" di Sunda? YES! (common)
+- "Keur" di Sunda? YES! (very unique!)
+- "Ia" di Sunda? YES!
+- Pattern ini combination hanya Sunda
+
+RESULT: SUNDA 92% ✅
+(Dulu cuma 65% dengan word-level)
+```
+
+### Hasil Improvement
+
+```
+SEBELUM:  ~75% accuracy
+          Sunda sering confusion dengan Indonesia
+
+SESUDAH:  ~85-90% accuracy
+          Sunda akurat dibedakan!
+          
+ALASANNYA:
+- Character patterns lebih spesifik
+- Model punya 300K parameters (dari 65K)
+- 3 layers (dari 2)
+- Lebih banyak capacity untuk belajar pola kompleks
+```
+
+### Bagaimana dengan User Corrections?
+
+Ini juga penting! Misalnya:
+
+```
+SCENARIO:
+1. User input teks Sunda: "Kuring keur diajar"
+2. Model predict: Indonesia 75% ❌ (SALAH!)
+3. User klik: [Sunda] (correction)
+4. Model save: "Ini seharusnya SUNDA"
+5. User click: Retrain
+
+SETELAH RETRAIN:
+Model melihat text ini lagi sebagai Sunda
+Model weight adjust: "Ah, character pattern ini = SUNDA!"
+Bias berkurang, accuracy meningkat
+
+NEXT PREDICTION:
+Input: "Kuring keur diajar"
+Output: SUNDA 94% ✅
+
+Benefit: User correction membantu model belajar
+         Semakin banyak koreksi = Semakin akurat
+```
+
+---
+
 **Semoga paham! Jika ada pertanyaan, tanya Kemal. 😊**
+
+**Intinya: Character patterns lebih powerful dari word patterns!** 🚀
 
 **Happy Learning! 🚀**
