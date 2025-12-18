@@ -5,11 +5,31 @@ import os
 import torch
 import threading
 from datetime import datetime
+import logging
 from model import load_or_create_model, predict_text, train_model, save_feedback
 
+# Configure logging
+logging.basicConfig(
+    level=os.getenv('LOG_LEVEL', 'INFO'),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Setup app
 CUSTOM_FRONTEND = os.path.join(os.path.dirname(__file__), '..', 'frontend')
 app = Flask(__name__, static_folder=CUSTOM_FRONTEND, static_url_path='')
-CORS(app)
+
+# Load config from environment or use default
+FLASK_ENV = os.getenv('FLASK_ENV', 'production')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+app.config['JSON_SORT_KEYS'] = False
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10 MB max
+
+# Configure CORS
+CORS_ORIGINS = os.getenv('CORS_ORIGINS', '*').split(',')
+CORS(app, resources={r"/api/*": {"origins": CORS_ORIGINS}})
+
+logger.info(f"App initialized in {FLASK_ENV} mode, DEBUG={DEBUG}")
 
 # Training state management
 training_state = {
@@ -21,8 +41,9 @@ training_state = {
 }
 training_lock = threading.Lock()
 
-# Prepare SQLite logging
-DB_PATH = os.path.join(os.path.dirname(__file__), "predictions.db")
+# Prepare SQLite logging - support both local and production paths
+DB_PATH = os.getenv('DB_PATH', os.path.join(os.path.dirname(__file__), "predictions.db"))
+logger.info(f"Database path: {DB_PATH}")
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -641,4 +662,18 @@ def predict_help():
     })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    # Get port from environment or use default
+    port = int(os.getenv('PORT', 5000))
+    
+    # Initialize database
+    init_db()
+    logger.info(f"Starting app on port {port}")
+    
+    # Run app with environment-specific settings
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=DEBUG,
+        use_reloader=DEBUG,  # Only use reloader in development
+        threaded=True
+    )
